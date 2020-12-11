@@ -16,7 +16,7 @@ RUN \
   apk add --no-cache \
     nodejs=12.18.4-r0 \
     npm=12.18.4-r0 && \
-  adduser -S etherpad && \
+  adduser -S etherpad --uid 5001 && \
   mkdir /opt/etherpad-lite && \
   chown etherpad:0 /opt/etherpad-lite
 USER etherpad
@@ -27,6 +27,5 @@ RUN bin/installDeps.sh && \
   rm -rf ~/.npm/_cacache && \
   for PLUGIN_NAME in ${ETHERPAD_PLUGINS}; do npm install "${PLUGIN_NAME}" || exit 1; done && \
   chmod -R g=u .
-
 EXPOSE 9001
 CMD ["node", "--experimental-worker", "node_modules/ep_etherpad-lite/node/server.js"]
