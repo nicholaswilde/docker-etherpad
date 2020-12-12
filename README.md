@@ -1,4 +1,6 @@
 # Docker Etherpad
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/nicholaswilde/etherpad)](https://hub.docker.com/r/nicholaswilde/etherpad)
+[![Docker Pulls](https://img.shields.io/docker/pulls/nicholaswilde/etherpad)](https://hub.docker.com/r/nicholaswilde/etherpad)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![YAML Lint](https://github.com/nicholaswilde/docker-etherpad/workflows/YAML%20Lint/badge.svg)](https://github.com/nicholaswilde/docker-etherpad/actions?query=workflow%3A%22YAML+Lint%22)
 [![hadolint](https://github.com/nicholaswilde/docker-etherpad/workflows/hadolint/badge.svg)](https://github.com/nicholaswilde/docker-etherpad/actions?query=workflow%3Ahadolint)
