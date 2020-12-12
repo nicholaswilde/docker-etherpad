@@ -6,7 +6,7 @@ RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
     git=2.26.2-r0 && \
-  git clone https://github.com/ether/etherpad-lite.git
+  git clone -b ${VERSION} https://github.com/ether/etherpad-lite.git
 
 FROM alpine:3.12.1
 ARG ETHERPAD_PLUGINS=""
