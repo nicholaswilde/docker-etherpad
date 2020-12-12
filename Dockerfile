@@ -1,7 +1,7 @@
 FROM --platform=$BUILDPLATFORM alpine:3.12.1 as base
 ARG TARGETARCH
 ARG BUILDPLATFORM
-ARG VERSION=0.2.9
+ARG VERSION=1.8.6
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
@@ -9,7 +9,7 @@ RUN \
   git clone https://github.com/ether/etherpad-lite.git
 
 FROM alpine:3.12.1
-ARG ETHERPAD_PLUGINS=
+ARG ETHERPAD_PLUGINS=""
 ENV NODE_ENV=production
 RUN \
   echo "**** install packages ****" && \
@@ -23,7 +23,8 @@ USER etherpad
 WORKDIR /opt/etherpad-lite
 COPY --from=base --chown=etherpad:0 /etherpad-lite ./
 COPY --from=base --chown=etherpad:0 /etherpad-lite/settings.json.docker /opt/etherpad-lite/settings.json
-RUN bin/installDeps.sh && \
+RUN \
+  bin/installDeps.sh && \
   rm -rf ~/.npm/_cacache && \
   for PLUGIN_NAME in ${ETHERPAD_PLUGINS}; do npm install "${PLUGIN_NAME}" || exit 1; done && \
   chmod -R g=u .
