@@ -2,6 +2,7 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![YAML Lint](https://github.com/nicholaswilde/docker-etherpad/workflows/YAML%20Lint/badge.svg)](https://github.com/nicholaswilde/docker-etherpad/actions?query=workflow%3A%22YAML+Lint%22)
 [![hadolint](https://github.com/nicholaswilde/docker-etherpad/workflows/hadolint/badge.svg)](https://github.com/nicholaswilde/docker-etherpad/actions?query=workflow%3Ahadolint)
+
 This README was originally from [etherpad-lite](https://github.com/ether/etherpad-lite).
 
 ## Differences
