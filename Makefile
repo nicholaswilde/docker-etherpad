@@ -2,6 +2,7 @@ include make_env
 
 NS ?= nicholaswilde
 VERSION ?= 1.8.6
+LS ?= 01
 
 IMAGE_NAME ?= etherpad
 CONTAINER_NAME ?= etherpad
@@ -11,57 +12,57 @@ CONTAINER_INSTANCE ?= default
 
 ## all		: Build all platforms
 all: Dockerfile
-	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION) $(PLATFORMS) --build-arg VERSION=$(VERSION) -f Dockerfile .
+	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS) $(PLATFORMS) --build-arg VERSION=$(VERSION) -f Dockerfile .
 
 ## build		: build the current platform (default)
 build: Dockerfile
-	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION) --build-arg VERSION=$(VERSION) -f Dockerfile .
+	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS) --build-arg VERSION=$(VERSION) -f Dockerfile .
 
-## build-latest	:	Build the latest current platform
+## build-latest	: Build the latest current platform
 build-latest: Dockerfile
 	docker buildx build -t $(NS)/$(IMAGE_NAME):latest --build-arg VERSION=$(VERSION) -f Dockerfile .
 
-## load   : Load the release image
+## load   	: Load the release image
 load: Dockerfile
-	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION) -f Dockerfile --load .
+	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS) -f Dockerfile --load .
 
-## load-latest  : Load the latest image
+## load-latest  	: Load the latest image
 load-latest: Dockerfile
 	docker buildx build -t $(NS)/$(IMAGE_NAME):latest -f Dockerfile --load .
 
-## push   : Push the release image
+## push   	: Push the release image
 push: Dockerfile
-	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION) --build-arg VERSION=$(VERSION) -f Dockerfile --push .
+	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS) --build-arg VERSION=$(VERSION) -f Dockerfile --push .
 
-## push-latest  : PUsh the latest image
+## push-latest  	: PUsh the latest image
 push-latest: Dockerfile
 	docker buildx build -t $(NS)/$(IMAGE_NAME):latest $(PLATFORMS) --build-arg VERSION=$(VERSION) -f Dockerfile --push .
 
-## push-all : Push all release platform images
+## push-all 	: Push all release platform images
 push-all: Dockerfile
-	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION) $(PLATFORMS) --build-arg VERSION=$(VERSION) -f Dockerfile --push .
+	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS) $(PLATFORMS) --build-arg VERSION=$(VERSION) -f Dockerfile --push .
 
-## rm   : Remove the container
+## rm   		: Remove the container
 rm: stop
 	docker rm $(CONTAINER_NAME)-$(CONTAINER_INSTANCE)
 
-## run    : Run the Docker image
+## run    	: Run the Docker image
 run:
 	docker run --rm --name $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) $(PORTS) $(ENV) $(NS)/$(IMAGE_NAME):$(VERSION)
 
-## rund   : Run the Docker image in the background
+## rund   	: Run the Docker image in the background
 rund:
 	docker run -d --rm --name $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) $(PORTS) $(ENV) $(NS)/$(IMAGE_NAME):$(VERSION)
 
-## stop   : Stop the Docker container
+## stop   	: Stop the Docker container
 stop:
 	docker stop $(CONTAINER_NAME)-$(CONTAINER_INSTANCE)
 
-## help   : Show help
+## help   	: Show help
 help: Makefile
 	@sed -n 's/^##//p' $<
 
-## vars   : Show all variables
+## vars   	: Show all variables
 vars:
 	@echo VERSION   : $(VERSION)
 	@echo NS        : $(NS)

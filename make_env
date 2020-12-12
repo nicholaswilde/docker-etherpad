@@ -1,4 +1,5 @@
 VERSION = 1.8.6
+LS=1
 NS = nicholaswilde
 
 # Run
