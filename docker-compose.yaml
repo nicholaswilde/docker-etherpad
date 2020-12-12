@@ -1,0 +1,14 @@
+
+---
+version: "2.1"
+services:
+  installer:
+    image: nicholaswilde/etherpad
+    container_name: etherpad
+    ports:
+      - 9001:9001
+    restart: unless-stopped
+    volumes:
+      - etherpad_data:/opt/etherpad-lite/var
+volumes:
+  etherpad_data:
