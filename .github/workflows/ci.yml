@@ -69,9 +69,9 @@ jobs:
           build-args: |
             VERSION=1.8.6
           tags: |
-            nicholaswilde/etherpad:${{ github.event.inputs.version }}
             nicholaswilde/etherpad:latest
-            ghcr.io/nicholaswilde/etherpad:${{ github.event.inputs.version }}
+            nicholaswilde/etherpad:${{ github.event.inputs.version }}
             ghcr.io/nicholaswilde/etherpad:latest
-            quay.io/nicholaswilde/etherpad:${{ github.event.inputs.version }}
+            ghcr.io/nicholaswilde/etherpad:${{ github.event.inputs.version }}
             quay.io/nicholaswilde/etherpad:latest
+            quay.io/nicholaswilde/etherpad:${{ github.event.inputs.version }}
