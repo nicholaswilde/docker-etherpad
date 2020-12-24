@@ -2,8 +2,9 @@
 [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/nicholaswilde/etherpad)](https://hub.docker.com/r/nicholaswilde/etherpad)
 [![Docker Pulls](https://img.shields.io/docker/pulls/nicholaswilde/etherpad)](https://hub.docker.com/r/nicholaswilde/etherpad)
 [![GitHub](https://img.shields.io/github/license/nicholaswilde/docker-etherpad)](./LICENSE)
-[![YAML Lint](https://github.com/nicholaswilde/docker-etherpad/workflows/YAML%20Lint/badge.svg)](https://github.com/nicholaswilde/docker-etherpad/actions?query=workflow%3A%22YAML+Lint%22)
+[![yamllint](https://github.com/nicholaswilde/docker-etherpad/workflows/yamllint/badge.svg)](https://github.com/nicholaswilde/docker-etherpad/actions?query=workflow%3Ayamllint)
 [![hadolint](https://github.com/nicholaswilde/docker-etherpad/workflows/hadolint/badge.svg)](https://github.com/nicholaswilde/docker-etherpad/actions?query=workflow%3Ahadolint)
+[![ci](https://github.com/nicholaswilde/docker-etherpad/workflows/ci/badge.svg)](https://github.com/nicholaswilde/docker-etherpad/actions?query=workflow%3Aci)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnicholaswilde%2Fdocker-etherpad.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnicholaswilde%2Fdocker-etherpad?ref=badge_shield)
 
