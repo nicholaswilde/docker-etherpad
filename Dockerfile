@@ -1,7 +1,7 @@
 FROM --platform=$BUILDPLATFORM alpine:3.12.1 as base
 ARG TARGETARCH
 ARG BUILDPLATFORM
-ARG VERSION=1.8.6
+ARG VERSION=1.8.7
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \

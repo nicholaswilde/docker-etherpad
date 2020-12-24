@@ -1,7 +1,7 @@
 include make_env
 
 NS ?= nicholaswilde
-VERSION ?= 1.8.6
+VERSION ?= 1.8.7
 LS ?= 01
 
 IMAGE_NAME ?= etherpad
