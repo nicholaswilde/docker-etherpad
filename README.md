@@ -240,6 +240,14 @@ docker run -d \
 	nicholaswilde/etherpad
 ```
 
+## Development
+
+See [Wiki](https://github.com/nicholaswilde/docker-template/wiki/Development).
+
+## Troubleshooting
+
+See [Wiki](https://github.com/nicholaswilde/docker-template/wiki/Troubleshooting).
+
 ### Pre-commit hook
 
 If you want to automatically generate `README.md` files with a pre-commit hook, make sure you
@@ -251,3 +259,10 @@ pre-commit install
 pre-commit install-hooks
 ```
 Currently, this only works on `arm64` systems.
+
+## License
+
+[Apache 2.0 License](./LICENSE)
+
+## Author
+This project was started in 2021 by [Nicholas Wilde](https://github.com/nicholaswilde/).
