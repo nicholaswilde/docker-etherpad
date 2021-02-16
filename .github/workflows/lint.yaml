@@ -13,33 +13,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      -
-        name: Check out the codebase.
+      - name: Check out the codebase.
         uses: actions/checkout@v2
-      -
-         name: Hadolint Action
+ 
+      - name: Hadolint Action
         # You may pin to the exact commit or the version.
         uses: brpaz/hadolint-action@v1.3.1
         with:
           # The path to the Dockerfile to lint
           dockerfile: Dockerfile # optional, default is Dockerfile
-
+          
   yamllint:
     name: Yamllint
     runs-on: ubuntu-latest
 
     steps:
-      -
-        name: Check out the codebase.
+      - name: Check out the codebase.
         uses: actions/checkout@v2
-      -
-        name: Set up Python 3.
+
+      - name: Set up Python 3.
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      -
-        name: Install test dependencies.
+
+      - name: Install test dependencies.
         run: pip3 install yamllint
-      -
-        name: Lint all the YAMLs.
+
+      - name: Lint all the YAMLs.
         run: yamllint .
