@@ -98,12 +98,6 @@ jobs:
             quay.io/${{ github.repository_owner }}/${{ env.repo_name }}:latest
             quay.io/${{ github.repository_owner }}/${{ env.repo_name }}:${{ env.tag }}
       -
-        name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      -
         name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -114,4 +108,3 @@ jobs:
           release_name: ${{ env.tag }}
           draft: false
           prerelease: false
-          body: ${{steps.github_release.outputs.changelog}}
