@@ -2,7 +2,7 @@ FROM alpine:3.13.1 as base
 
 FROM base as dl
 ARG VERSION
-ARG CHECKSUM=8954af79cde7bc8b10b8d0fca6ed772228cf7bacb50af845b235d553bb24a919
+ARG CHECKSUM=8151e7532b2bf956431438be8983d0b8d009c50d8b186026bff07dc3b6a1a84c
 WORKDIR /tmp
 ARG FILENAME="${VERSION}.tar.gz"
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
@@ -38,9 +38,9 @@ ENV NODE_ENV=production
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    nodejs=14.15.5-r0 \
+    nodejs=14.16.0-r0 \
     tzdata=2021a-r0 \
-    npm=14.15.5-r0 && \
+    npm=14.16.0-r0 && \
   adduser -S etherpad --uid 5001 && \
   mkdir /opt/etherpad-lite && \
 	echo "**** cleanup ****" && \

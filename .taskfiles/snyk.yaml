@@ -1,0 +1,23 @@
+---
+version: '3'
+
+tasks:
+  test:
+    desc: Test local project for vulnerabilities
+    cmds:
+      - "snyk container test {{ .TAG_VERSION }} --file=Dockerfile"
+    deps:
+      - snyk-deps
+
+  monitor:
+    desc: Monitor the image with snyk
+    cmds:
+      - "snyk container monitor {{ .TAG_VERSION }}"
+    deps:
+      - snyk-deps
+
+  snyk-deps:
+    preconditions:
+      - sh: "snyk version"
+        msg: "snyk is not installed"
+    silient: true
