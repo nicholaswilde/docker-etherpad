@@ -56,7 +56,7 @@ tasks:
       - "hadolint Dockerfile"
       - "yamllint ."
     preconditions:
-      - sh: type hadolint2
+      - sh: type hadolint
         msg: "hadolint is not installed. Run 'task deps:hadolint'"
       - sh: type yamllint
         msg: "yamllint is not installed. Run 'task deps:yamllint'"
@@ -74,6 +74,7 @@ tasks:
     preconditions:
       - sh: type pre-commit
         msg: "pre-commit is not installed. Run 'task deps:pre-commit'"
+    silent: true
 
   prune:
     desc: Prune the builder
@@ -149,7 +150,8 @@ tasks:
       - 'printf "{{ .COLOR }}* TYPE\e[m               %s\n" "{{ .TYPE }}"'
       - 'printf "{{ .COLOR }}* VERSION\e[m            %s\n" "{{ .VERSION }}"'
     vars:
-      COLOR: '\e[1;34m' # Blue
+      # Blue
+      COLOR: '\e[1;34m'
     silent: true
 
   default:

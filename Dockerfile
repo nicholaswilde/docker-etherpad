@@ -2,7 +2,7 @@ FROM alpine:3.13.1 as base
 
 FROM base as dl
 ARG VERSION
-ARG CHECKSUM=8151e7532b2bf956431438be8983d0b8d009c50d8b186026bff07dc3b6a1a84c
+ARG CHECKSUM=b9b9916d8e1b1ebe6dac5ebc0f24fa1ea064ddfd1307919bef2b58d7a8d5339c
 WORKDIR /tmp
 ARG FILENAME="${VERSION}.tar.gz"
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
