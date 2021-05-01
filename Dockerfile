@@ -12,7 +12,7 @@ RUN \
     wget=1.21.1-r1 && \
   echo "**** download haste ****" && \
   mkdir /app && \
-  wget "https://github.com/ether/etherpad-lite/archive/${FILENAME}" && \
+  wget --progress=dot:giga "https://github.com/ether/etherpad-lite/archive/${FILENAME}" && \
   echo "${CHECKSUM}  ${FILENAME}" | sha256sum -c && \
   tar -xvf "${FILENAME}" -C /app --strip-components 1
 WORKDIR /app
@@ -32,6 +32,7 @@ FROM base
 ARG BUILD_DATE
 ARG VERSION
 ARG ETHERPAD_PLUGINS=""
+# hadolint ignore=DL3048
 LABEL build_version="Version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="nicholaswilde"
 ENV NODE_ENV=production
