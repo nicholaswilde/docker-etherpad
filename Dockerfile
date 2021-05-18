@@ -2,7 +2,7 @@ FROM alpine:3.13.5 as base
 
 FROM base as dl
 ARG VERSION
-ARG CHECKSUM=c83052daf3b0af8aa3c19a8308e21fcbcfecca99aeb3e8047383875f855443f1
+ARG CHECKSUM
 WORKDIR /tmp
 ARG FILENAME="${VERSION}.tar.gz"
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
@@ -12,7 +12,7 @@ RUN \
     wget=1.21.1-r1 && \
   echo "**** download haste ****" && \
   mkdir /app && \
-  wget --progress=dot:giga "https://github.com/ether/etherpad-lite/archive/${FILENAME}" && \
+  wget -q --progress=dot:giga "https://github.com/ether/etherpad-lite/archive/${FILENAME}" && \
   echo "${CHECKSUM}  ${FILENAME}" | sha256sum -c && \
   tar -xvf "${FILENAME}" -C /app --strip-components 1
 WORKDIR /app

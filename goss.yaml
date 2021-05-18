@@ -1,0 +1,14 @@
+---
+port:
+  tcp:9001:
+    listening: true
+
+process:
+  node:
+    running: true
+
+http:
+  http://localhost:9001:
+    status: 200
+    body:
+      - <title>Etherpad</title>

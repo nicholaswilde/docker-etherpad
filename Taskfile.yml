@@ -4,6 +4,12 @@ version: '3'
 dotenv: ['task.env']
 
 vars:
+  VERSION:
+    sh: cat VERSION
+  CHECKSUM:
+    sh: cat CHECKSUM
+  LS:
+    sh: cat LS
   BUILD_DATE:
     sh: "date -u +%Y-%m-%dT%H%M%S%Z"
   BUILD_ARGS: >-
@@ -14,8 +20,11 @@ vars:
   TAG_LATEST: "{{ .NS }}/{{ .IMAGE_NAME }}:latest"
   CONTAINER: "{{ .CONTAINER_NAME }}-{{ .CONTAINER_INSTANCE }}"
   RUN: "docker run -it --rm --name {{ .CONTAINER_NAME }}-{{ .CONTAINER_INSTANCE }} {{ .ENV }} {{ .PORTS }}"
+  DGOSS_RUN: "dgoss run -it --rm --name {{ .CONTAINER_NAME }}-{{ .CONTAINER_INSTANCE }} {{ .ENV }} {{ .PORTS }}"
+  DGOSS_EDIT: "dgoss edit -it --rm --name {{ .CONTAINER_NAME }}-{{ .CONTAINER_INSTANCE }} {{ .ENV }} {{ .PORTS }}"
   EXEC: "docker exec -it {{ .CONTAINER }}"
   BUILD: "docker buildx build {{ .BUILD_ARGS }} -t"
+  API_URL: "https://api.github.com/repos/{{ .SOURCE_ORG }}/{{ .SOURCE_REPO }}/releases/latest"
 
 includes:
   build: ./.taskfiles/build.yaml
@@ -23,12 +32,15 @@ includes:
   chk: ./.taskfiles/chk.yaml
   date: ./.taskfiles/date.yaml
   deps: ./.taskfiles/deps.yaml
+  goss: ./.taskfiles/goss.yaml
   image: ./.taskfiles/image.yaml
   load: ./.taskfiles/load.yaml
+  ls: ./.taskfiles/ls.yaml
   pkgs: ./.taskfiles/pkgs.yaml
   run: ./.taskfiles/run.yaml
   shell: ./.taskfiles/shell.yaml
   snyk: ./.taskfiles/snyk.yaml
+  version: ./.taskfiles/version.yaml
 
 tasks:
   build:
@@ -37,13 +49,6 @@ tasks:
       - "{{ .BUILD }} {{ .TAG_VERSION }} -f Dockerfile ."
     deps:
       - build:build-deps
-
-  checksum:
-    desc: Get the checksum of the release or source package.
-    deps:
-      - chk:_varcheck
-      - chk:_release
-      - chk:_source
 
   date:
     desc: Get the date of the image
@@ -60,6 +65,7 @@ tasks:
         msg: "hadolint is not installed. Run 'task deps:hadolint'"
       - sh: type yamllint
         msg: "yamllint is not installed. Run 'task deps:yamllint'"
+    silent: true
 
   load:
     desc: Load the release image
@@ -101,20 +107,41 @@ tasks:
     cmds:
       - "sed -i 's/template/{{ .IMAGE_NAME }}/g' README.md"
 
+  rm:
+    desc: Remove the image
+    cmds:
+      - "docker rmi -f {{ .TAG_VERSION }}"
+
   run:
     desc: Run the image in the foreground
     cmds:
       - "{{ .RUN }} {{ .TAG_VERSION }}"
+    preconditions:
+      - docker images -q {{ .TAG_VERSION }} 2> /dev/null
 
   rund:
     desc: Run the image in the background
     cmds:
       - "{{ .RUN }} -d {{ .TAG_VERSION }}"
 
+  secrets:
+    desc: Upload secrets to repo from pass
+    cmds:
+      - "pass github/login-action | gh secret set CR_PAT"
+      - "pass docker/username | gh secret set DOCKERHUB_USERNAME"
+      - "pass docker/token | gh secret set DOCKERHUB_TOKEN"
+      - "pass quay.io/robot | gh secret set QUAY_USERNAME"
+      - "pass quay.io/token | gh secret set QUAY_TOKEN"
+    deps:
+      - deps:_secrets-reqs
+    silent: true
+
   shell:
     desc: Run a shell of an image
     cmds:
-      - "{{ .RUN }} --entrypoint /bin/sh -u 0 {{ .TAG_VERSION }}"
+      - "{{ .RUN }} --entrypoint /bin/sh -u {{ .U }} {{ .TAG_VERSION }}"
+    vars:
+      U: '{{ default "0" .U }}'
 
   stop:
     desc: Stop a running container
@@ -124,7 +151,9 @@ tasks:
   up:
     desc: Run docker-compose up
     cmds:
-      - docker-compose -f docker-compose.sqlite.yaml up
+      - docker-compose -f docker-compose.yaml up
+    deps:
+      - load:latest
 
   vars:
     desc: Print all the variables
