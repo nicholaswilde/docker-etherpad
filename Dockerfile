@@ -39,7 +39,7 @@ ENV NODE_ENV=production
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    nodejs=14.16.1-r1 \
+    nodejs=14.17.1-r0 \
     tzdata=2021a-r0 \
     npm=14.16.1-r1 && \
   adduser -S etherpad --uid 5001 && \
