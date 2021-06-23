@@ -41,7 +41,7 @@ RUN \
   apk add --no-cache \
     nodejs=14.17.1-r0 \
     tzdata=2021a-r0 \
-    npm=14.16.1-r1 && \
+    npm=7.17.0-r0 && \
   adduser -S etherpad --uid 5001 && \
   mkdir /opt/etherpad-lite && \
 	echo "**** cleanup ****" && \
