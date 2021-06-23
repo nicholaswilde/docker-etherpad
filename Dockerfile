@@ -1,4 +1,4 @@
-FROM alpine:3.13.5 as base
+FROM alpine:3.14.0 as base
 
 FROM base as dl
 ARG VERSION
@@ -39,9 +39,9 @@ ENV NODE_ENV=production
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    nodejs=14.16.1-r1 \
+    nodejs=14.17.1-r0 \
     tzdata=2021a-r0 \
-    npm=14.16.1-r1 && \
+    npm=7.17.0-r0 && \
   adduser -S etherpad --uid 5001 && \
   mkdir /opt/etherpad-lite && \
 	echo "**** cleanup ****" && \
