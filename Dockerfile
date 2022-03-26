@@ -1,4 +1,4 @@
-FROM alpine:3.14.0 as base
+FROM alpine:3.15.2 as base
 
 FROM base as dl
 ARG VERSION
