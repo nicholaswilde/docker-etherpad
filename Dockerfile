@@ -39,8 +39,8 @@ ENV NODE_ENV=production
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    nodejs=14.17.1-r0 \
-    tzdata=2021a-r0 \
+    nodejs=14.19.0-r0 \
+    tzdata=2022a-r0 \
     npm=7.17.0-r0 && \
   adduser -S etherpad --uid 5001 && \
   mkdir /opt/etherpad-lite && \
