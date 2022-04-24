@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.2
 
       # Define if tests and push should be run against which versions/platforms
       - name: Prepare
@@ -106,7 +106,7 @@ jobs:
       - tag-does-not-exist
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.2
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1.2.0
@@ -117,7 +117,7 @@ jobs:
           driver-opts: image=moby/buildkit:master
 
       - name: Cache Docker layers
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.2
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
@@ -126,7 +126,7 @@ jobs:
 
       # Install the GOSS testing framework
       - name: Set up goss/dgoss
-        uses: e1himself/goss-installation-action@v1.0.3
+        uses: e1himself/goss-installation-action@v1.0.4
         if: needs.prep.outputs.goss == 'true'
         with:
           version: 'v0.3.16'
