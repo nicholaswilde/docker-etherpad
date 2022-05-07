@@ -1,4 +1,4 @@
-FROM alpine:3.14.0 as base
+FROM alpine:3.15.4 as base
 
 FROM base as dl
 ARG VERSION
@@ -9,7 +9,7 @@ SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    wget=1.21.1-r1 && \
+    wget=1.21.2-r2 && \
   echo "**** download haste ****" && \
   mkdir /app && \
   wget -q --progress=dot:giga "https://github.com/ether/etherpad-lite/archive/${FILENAME}" && \
@@ -39,9 +39,9 @@ ENV NODE_ENV=production
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    nodejs=14.19.0-r0 \
+    nodejs=16.14.2-r0 \
     tzdata=2022a-r0 \
-    npm=7.17.0-r0 && \
+    npm=8.1.3-r0 && \
   adduser -S etherpad --uid 5001 && \
   mkdir /opt/etherpad-lite && \
 	echo "**** cleanup ****" && \
